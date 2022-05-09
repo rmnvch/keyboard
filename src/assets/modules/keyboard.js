@@ -55,7 +55,7 @@ export const Keyboard = {
         
           for(let key of this.elements.keys) {
 
-              if(event.key === key.dataset.key) {
+              if(event.key === key.dataset.key || event.key === key.dataset.key.toUpperCase() ) {
                 key.classList.add('keyboard__key--keyDown')}
           } 
         })
@@ -64,7 +64,7 @@ export const Keyboard = {
         
             for(let key of this.elements.keys) {
   
-                if(event.key === key.dataset.key) {
+                if(event.key === key.dataset.key || event.key === key.dataset.key.toUpperCase() ) {
   
                   setTimeout(()=> {
                     key.classList.remove('keyboard__key--keyDown')
@@ -72,8 +72,12 @@ export const Keyboard = {
                 }
             } 
           })
+
+
+        console.log(Keyboard);
         
         this._updateKeysProp();
+
     },
 
     _createKeys(lang) {
