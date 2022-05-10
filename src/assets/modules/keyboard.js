@@ -54,7 +54,10 @@ export const Keyboard = {
         });
 
         this.elements.display.addEventListener('keydown', (event) => {
-
+            if(event.key === "CapsLock") {
+                this._toggleCapsLock();
+            }   
+         
           if(event.key === "Shift") {
               this.props.shiftPress = true;
           }  
@@ -193,7 +196,6 @@ export const Keyboard = {
 
                     keyEl.addEventListener("click", () => {
                         this._toggleCapsLock();
-                        keyEl.classList.toggle("keyboard__key--active", this.props.capsLock);
                     });
                 break;
 
@@ -450,8 +452,9 @@ export const Keyboard = {
                 key.textContent = this.props.capsLock ? key.textContent.toUpperCase() : key.textContent.toLowerCase();
             }
         }
-
         
+        this.elements.layout.querySelector('[data-key="CapsLock"]').classList.toggle("keyboard__key--active", this.props.capsLock);
+
     },
 
     _changeLang(){
