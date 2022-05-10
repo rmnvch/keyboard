@@ -23,7 +23,9 @@ export const Keyboard = {
         value: '',
         capsLock: false,
         lang: localStorage['lang'] || 'EN',
-        carret: null,   
+        carret: null,  
+        shiftPress: false,
+        altPress: false, 
     },
 
     init(display) {
@@ -52,6 +54,18 @@ export const Keyboard = {
         });
 
         this.elements.display.addEventListener('keydown', (event) => {
+
+          if(event.key === "Shift") {
+              this.props.shiftPress = true;
+          }  
+          
+          if(event.key === "Alt") {
+            this.props.altPress = true;
+          }
+          
+          if(this.props.shiftPress && this.props.altPress) {
+              this._changeLang();
+          }
         
           for(let key of this.elements.keys) {
 
@@ -61,6 +75,14 @@ export const Keyboard = {
         })
 
         this.elements.display.addEventListener('keyup', (event) => {
+
+            if(event.key === "Shift") {
+                this.props.shiftPress = false;
+            }  
+            
+            if(event.key === "Alt") {
+              this.props.altPress = false;
+            }
         
             for(let key of this.elements.keys) {
   
@@ -88,7 +110,7 @@ export const Keyboard = {
             '`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace', 'Delete', 
             'Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\',  
             'CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", 'Enter', 
-            'ShiftL', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'ArrowUp', 'Shift', 
+            'Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'ArrowUp', 'ShiftR', 
             'Control', 'Meta', 'Alt', ' ', 'Alt', 'Control', 'ArrowLeft', 'ArrowDown', 'ArrowRight'
         ];
 
@@ -96,7 +118,7 @@ export const Keyboard = {
             'ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace', 'Delete', 
             'Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\', 
             'CapsLock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'Enter', 
-            'ShiftL', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', 'ArrowUp', 'Shift', 
+            'Shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', 'ArrowUp', 'ShiftR', 
             'Control', 'Meta', 'Alt', ' ', 'Alt', 'Control', 'ArrowLeft', 'ArrowDown', 'ArrowRight'
         ];
 
@@ -325,7 +347,7 @@ export const Keyboard = {
                     });
                 break;
 
-                case 'ShiftL':
+                case 'ShiftR':
                     keyEl.append(this._createFakeCildEl('Shift'))
                     keyEl.classList.add('keyboard__key--wide')
                     keyEl.addEventListener("click", () => {
@@ -379,7 +401,7 @@ export const Keyboard = {
             
             fragment.append(keyEl);
             
-            if (['\\', 'delete', 'Enter', 'Shift'].includes(currentLang[i])) {
+            if (['\\', 'delete', 'Enter', 'ShiftR'].includes(currentLang[i])) {
                 fragment.append(document.createElement('br'));
             }
 
