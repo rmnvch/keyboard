@@ -308,6 +308,8 @@ export const Keyboard = {
                     keyEl.append(iconUp);
 
                     keyEl.addEventListener("click", () => {
+                        this.props.value += '&#8593';
+                        this._onKeyClick();
                     });
                 break;
 
@@ -452,7 +454,7 @@ export const Keyboard = {
                 key.textContent = this.props.capsLock ? key.textContent.toUpperCase() : key.textContent.toLowerCase();
             }
         }
-        
+
         this.elements.layout.querySelector('[data-key="CapsLock"]').classList.toggle("keyboard__key--active", this.props.capsLock);
 
     },

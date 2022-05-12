@@ -6,6 +6,9 @@
   "dependencies": {},
   "devDependencies": {
     "css-loader": "^6.7.1",
+    "eslint": "^8.15.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.26.0",
     "html-webpack-plugin": "^5.5.0",
     "style-loader": "^3.3.1",
     "webpack": "^5.72.0",
@@ -14,7 +17,9 @@
   },
   "scripts": {
     "build": "webpack",
-    "serve": "webpack serve --open"
+    "serve": "webpack serve --open",
+    "lint": "eslint /.src",
+    "lint:fix": "eslint /.src --fix"
   },
   "author": "",
   "license": "ISC"
